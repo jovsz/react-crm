@@ -12,9 +12,10 @@ import {
   Layout,
   OffLayoutArea,
 } from "components/layout";
+import { UserList, UserCreate, UserShow } from './pages/users';
 
 function App() {
-  const API_URL = "https://api.fake-rest.refine.dev";
+  const API_URL = "http://localhost:8000/api/v1";
   const dataProvider = simpleRestDataProvider(API_URL);
   return (
     <Refine
@@ -27,6 +28,13 @@ function App() {
           create: PostCreate,
           edit: PostEdit,
           show: PostShow,
+        },
+        {
+          name: "user",
+          list: UserList,
+          create: UserCreate,
+          // edit: PostEdit,
+           show: UserShow,
         },
       ]}
       Title={Title}

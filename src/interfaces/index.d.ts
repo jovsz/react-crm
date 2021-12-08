@@ -10,3 +10,17 @@ export interface IPost {
   createdAt: string;
   category: ICategory;
 }
+
+export interface IUser {
+  id: string;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  company:string;
+  status: boolean;
+  createdAt: string;
+  
+}
+
