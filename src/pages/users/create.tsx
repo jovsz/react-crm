@@ -4,9 +4,12 @@ import {
   Form,
   Input,
   Select,
+  getValueFromEvent,
   useSelect,
+  useApiUrl,
   IResourceComponentsProps,
   useForm,
+  Upload,
 } from "@pankod/refine";
 
 import ReactMarkdown from "react-markdown";
@@ -21,58 +24,118 @@ export const UserCreate: React.FC<IResourceComponentsProps> = () => {
 
   const { formProps, saveButtonProps } = useForm<IUser>();
 
+  const apiUrl = useApiUrl();
 
   return (
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
         <Form.Item
-          label="Title"
-          name="title"
+          label="username"
+          name="username"
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Input />
+        <Input />
         </Form.Item>
         <Form.Item
-          label="Status"
-          name="status"
+          label="email"
+          name="email"
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Select
+        <Input />
+        </Form.Item>
+        <Form.Item
+          label="password"
+          name="password"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+        <Input />
+        </Form.Item>
+        <Form.Item
+          label="firstName"
+          name="firstName"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+        <Input />
+        </Form.Item>
+        <Form.Item
+          label="lastName"
+          name="lastName"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+        <Input />
+        </Form.Item>
+        <Form.Item
+          label="phone"
+          name="phone"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+        <Input />
+        </Form.Item>
+        <Form.Item
+          label="rol"
+          name="rol"
+        >
+        <Select
             options={[
               {
-                label: "published",
-                value: "published",
+                label: "user",
+                value: "user",
               },
               {
-                label: "draft",
-                value: "draft",
+                label: "designer",
+                value: "designer",
               },
               {
-                label: "rejected",
-                value: "rejected",
+                label: "admin",
+                value: "admin",
               },
             ]}
           />
         </Form.Item>
-
-        
-        
-          <ReactMde
-            selectedTab={selectedTab}
-            onTabChange={setSelectedTab}
-            generateMarkdownPreview={(markdown) =>
-              Promise.resolve(<ReactMarkdown>{markdown}</ReactMarkdown>)
-            }
-          />
-        
+        <Form.Item label="image">
+              <Form.Item
+                name="img_photo"
+                valuePropName="url"
+                getValueFromEvent={getValueFromEvent}
+                noStyle
+              >
+              <Upload.Dragger
+                name="file"
+                action={`${apiUrl}/user/upload`}
+                listType="picture"
+                maxCount={1}
+                multiple
+              >
+              <p className="ant-upload-text">
+                Drag & drop a file in this area
+              </p>
+            </Upload.Dragger>
+          </Form.Item>
+        </Form.Item>
       </Form>
     </Create>
   );

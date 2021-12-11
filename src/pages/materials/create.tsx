@@ -1,16 +1,17 @@
 import { useState } from "react";
 import {
-  Edit,
+  Create,
   Form,
   Input,
   Select,
+  getValueFromEvent,
+  useSelect,
+  useApiUrl,
   IResourceComponentsProps,
   useForm,
-  useSelect,
-  getValueFromEvent,
   Upload,
-  useApiUrl,
 } from "@pankod/refine";
+
 import ReactMarkdown from "react-markdown";
 import ReactMde from "react-mde";
 
@@ -18,15 +19,16 @@ import "react-mde/lib/styles/css/react-mde-all.css";
 
 import { IUser } from "interfaces";
 
-export const UserEdit: React.FC<IResourceComponentsProps> = () => {
+export const UserCreate: React.FC<IResourceComponentsProps> = () => {
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
-  const apiUrl = useApiUrl();
-  const { formProps, saveButtonProps, queryResult } = useForm<IUser>();
 
+  const { formProps, saveButtonProps } = useForm<IUser>();
+
+  const apiUrl = useApiUrl();
 
   return (
-    <Edit saveButtonProps={saveButtonProps}>
-      <Form {...formProps} layout="vertical" >
+    <Create saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical">
         <Form.Item
           label="username"
           name="username"
@@ -36,7 +38,7 @@ export const UserEdit: React.FC<IResourceComponentsProps> = () => {
             },
           ]}
         >
-          <Input />
+        <Input />
         </Form.Item>
         <Form.Item
           label="email"
@@ -47,7 +49,18 @@ export const UserEdit: React.FC<IResourceComponentsProps> = () => {
             },
           ]}
         >
-          <Input />
+        <Input />
+        </Form.Item>
+        <Form.Item
+          label="password"
+          name="password"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+        <Input />
         </Form.Item>
         <Form.Item
           label="firstName"
@@ -58,7 +71,7 @@ export const UserEdit: React.FC<IResourceComponentsProps> = () => {
             },
           ]}
         >
-          <Input />
+        <Input />
         </Form.Item>
         <Form.Item
           label="lastName"
@@ -69,7 +82,7 @@ export const UserEdit: React.FC<IResourceComponentsProps> = () => {
             },
           ]}
         >
-          <Input />
+        <Input />
         </Form.Item>
         <Form.Item
           label="company"
@@ -80,20 +93,9 @@ export const UserEdit: React.FC<IResourceComponentsProps> = () => {
             },
           ]}
         >
-          <Input />
+        <Input />
         </Form.Item>
-        <Form.Item
-          label="password"
-          name="password"
-          
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+
         <Form.Item
           label="phone"
           name="phone"
@@ -103,33 +105,7 @@ export const UserEdit: React.FC<IResourceComponentsProps> = () => {
             },
           ]}
         >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="rol"
-          name="rol"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Select
-            options={[
-              {
-                label: "Admin",
-                value: "admin",
-              },
-              {
-                label: "Designer",
-                value: "designer",
-              },
-              {
-                label: "User",
-                value: "user",
-              }
-            ]}
-          />
+        <Input />
         </Form.Item>
         <Form.Item label="image">
               <Form.Item
@@ -151,8 +127,7 @@ export const UserEdit: React.FC<IResourceComponentsProps> = () => {
             </Upload.Dragger>
           </Form.Item>
         </Form.Item>
-            
       </Form>
-    </Edit>
+    </Create>
   );
 };

@@ -12,11 +12,13 @@ import {
   useMany,
   useSelect,
   TagField,
+  ImageField,
   FilterDropdown,
   Select,
   ShowButton,
 } from "@pankod/refine";
-import {  IUser } from "interfaces";
+import { url } from "inspector";
+import {  IUser} from "interfaces";
 
 export const UserList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps, sorter } = useTable<IUser>({
@@ -27,6 +29,8 @@ export const UserList: React.FC<IResourceComponentsProps> = () => {
       },
     ],
   });
+
+
 
   return (
     <List>
@@ -39,6 +43,27 @@ export const UserList: React.FC<IResourceComponentsProps> = () => {
           defaultSortOrder={getDefaultSortOrder("id", sorter)}
           sorter
         />
+        <Table.Column<IUser>
+                    title="img_photo"
+                    dataIndex="img_photo"
+                    render={(_, record) => (
+                        <ImageField
+                            value={record.img_photo ? record.img_photo[0].response.url : ''}
+                            title={record.img_photo ? record.img_photo[0].name : ''}
+                            width={200}
+                            
+                            height={200}
+                        />
+                    )}
+                />
+        {/* <Table.Column
+          dataIndex="img_photo"
+          key="img_photo"
+          title="Picture"
+          render={(value) => <TextField value={value.name} />}
+          defaultSortOrder={getDefaultSortOrder("img_photo", sorter)}
+          sorter
+        /> */}
         <Table.Column
           dataIndex="username"
           key="username"
@@ -95,7 +120,7 @@ export const UserList: React.FC<IResourceComponentsProps> = () => {
           defaultSortOrder={getDefaultSortOrder("createdAt", sorter)}
           sorter
         />
-       
+      
           
       
         <Table.Column<IUser>

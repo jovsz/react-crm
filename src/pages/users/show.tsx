@@ -6,6 +6,8 @@ import {
   useOne,
   IResourceComponentsProps,
   MarkdownField,
+  Table,
+  ImageField,
 } from "@pankod/refine";
 
 import { IUser } from "interfaces";
@@ -17,16 +19,16 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
   const { data, isLoading } = queryResult;
   const record = data?.data;
   
-  // const { data: categoryData } = useOne<ICategory>({
-  //   resource: "categories",
-  //   id: record?.category.id ?? "",
-  //   queryOptions: {
-  //     enabled: !!record?.category.id,
-  //   },
-  // });
 
   return (
     <Show isLoading={isLoading}>
+      <Title level={5}>Picture</Title>
+      <ImageField
+        value={record?.img_photo[0].response.url}
+        title={record?.img_photo[0].name}
+        width={200}
+      />
+
       <Title level={5}>username</Title>
       <Text>{record?.username}</Text>
 
@@ -39,8 +41,11 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
       <Title level={5}>Company</Title>
       <Text>{record?.company}</Text>
 
-      <Title level={5}>phone</Title>
+      <Title level={5}>Phone</Title>
       <Text>{record?.phone}</Text>
+
+      <Title level={5}>Rol</Title>
+      <Text>{record?.rol}</Text>
       
     </Show>
   );

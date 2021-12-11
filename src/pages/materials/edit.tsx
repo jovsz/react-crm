@@ -85,7 +85,6 @@ export const UserEdit: React.FC<IResourceComponentsProps> = () => {
         <Form.Item
           label="password"
           name="password"
-          
           rules={[
             {
               required: true,
@@ -106,8 +105,8 @@ export const UserEdit: React.FC<IResourceComponentsProps> = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label="rol"
-          name="rol"
+          label="Status"
+          name="status"
           rules={[
             {
               required: true,
@@ -117,39 +116,15 @@ export const UserEdit: React.FC<IResourceComponentsProps> = () => {
           <Select
             options={[
               {
-                label: "Admin",
-                value: "admin",
+                label: "True",
+                value: "true",
               },
               {
-                label: "Designer",
-                value: "designer",
-              },
-              {
-                label: "User",
-                value: "user",
+                label: "False",
+                value: "false",
               }
             ]}
           />
-        </Form.Item>
-        <Form.Item label="image">
-              <Form.Item
-                name="img_photo"
-                valuePropName="url"
-                getValueFromEvent={getValueFromEvent}
-                noStyle
-              >
-              <Upload.Dragger
-                name="file"
-                action={`${apiUrl}/user/upload`}
-                listType="picture"
-                maxCount={1}
-                multiple
-              >
-              <p className="ant-upload-text">
-                Drag & drop a file in this area
-              </p>
-            </Upload.Dragger>
-          </Form.Item>
         </Form.Item>
             
       </Form>
