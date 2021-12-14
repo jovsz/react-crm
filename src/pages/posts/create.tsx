@@ -77,6 +77,7 @@ export const PostCreate: React.FC<IResourceComponentsProps> = () => {
         >
           <Select {...categorySelectProps} />
         </Form.Item>
+
         <Form.Item
           label="Content"
           name="content"

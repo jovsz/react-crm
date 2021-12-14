@@ -23,6 +23,7 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
   return (
     <Show isLoading={isLoading}>
       <Title level={5}>Picture</Title>
+      
       <ImageField
         value={record?.img_photo[0].response.url}
         title={record?.img_photo[0].name}

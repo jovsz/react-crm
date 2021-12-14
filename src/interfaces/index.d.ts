@@ -86,3 +86,34 @@ export interface IOptions {
   label: string | React.ReactNode;
   options: IOptionGroup[];
 }
+
+export interface IConfiguration {
+  id:string;
+  name: string;
+  note: string;
+  preset: string;
+  img_photo: [
+    {
+        id: string;
+        name: string;
+        response: {url:string};
+        url: string;
+        status: "error" | "success" | "done" | "uploading" | "removed";
+    },
+  ];
+  material_array: Array;
+  total_price: string;
+  active: boolean;
+  createdAt: string;
+  status:boolean;
+  user_id: IUser;
+  project_id: string;
+  product_id: [
+    {
+      id:string;
+      type:string;
+      name:string;
+      base_price:string;
+    }
+  ];
+}
