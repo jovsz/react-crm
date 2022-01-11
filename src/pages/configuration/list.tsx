@@ -49,8 +49,7 @@ export const ConfigurationList: React.FC<IResourceComponentsProps> = () => {
   
   });
 
-  const categoryIds =
-    tableProps?.dataSource?.map((item) => item.user_id.id) ?? [];
+  const categoryIds = tableProps?.dataSource?.map((item) => item.user_id.id) ?? [];
   const { data: usersData, isLoading } = useMany<IUser>({
     resource: "user",
     ids: categoryIds,
