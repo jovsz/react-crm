@@ -14,7 +14,7 @@ import {
 } from "components/layout";
 import { UserList, UserCreate, UserShow, UserEdit } from './pages/users';
 import { MaterialList, MaterialShow, MaterialEdit} from './pages/materials'
-import { ConfigurationCreate, ConfigurationList, ConfigurationShow } from './pages/configuration';
+import { ConfigurationCreate, ConfigurationList, ConfigurationShow, ConfigurationEdit } from './pages/configuration';
 import {authProvider } from './utility/auth-provider';
 
 
@@ -55,6 +55,7 @@ function App() {
           list: ConfigurationList,
           show: ConfigurationShow,
           create: ConfigurationCreate,
+          edit: ConfigurationEdit
         }
       ]}
       Title={Title}

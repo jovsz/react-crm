@@ -101,7 +101,7 @@ export interface IConfiguration {
         status: "error" | "success" | "done" | "uploading" | "removed";
     },
   ];
-  material_array: Array;
+  material_array: object;
   total_price: string;
   active: boolean;
   createdAt: string;

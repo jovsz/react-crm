@@ -24,14 +24,14 @@ import {
   getValueFromEvent,
   Input,
 } from "@pankod/refine";
-import {  IConfiguration, IUser } from "interfaces";
+import { IConfiguration, IUser } from "interfaces";
 
 
 
 export const ConfigurationList: React.FC<IResourceComponentsProps> = () => {
   const { CloseCircleOutlined, CheckCircleOutlined } = Icons;
-  
-  const { tableProps, sorter, filters  } = useTable<IConfiguration>({
+
+  const { tableProps, sorter, filters } = useTable<IConfiguration>({
     initialSorter: [
       {
         field: "id",
@@ -40,13 +40,13 @@ export const ConfigurationList: React.FC<IResourceComponentsProps> = () => {
     ],
     initialFilter: [
       {
-          field: "status",
-          operator: "eq",
-          value: 'name',
+        field: "status",
+        operator: "eq",
+        value: 'name',
       },
-      
-  ],syncWithLocation: true,
-  
+
+    ], syncWithLocation: true,
+
   });
 
   const categoryIds = tableProps?.dataSource?.map((item) => item.user_id.id) ?? [];
@@ -65,6 +65,7 @@ export const ConfigurationList: React.FC<IResourceComponentsProps> = () => {
   return (
     <List>
       <Table {...tableProps} rowKey="id">
+        
         <Table.Column
           dataIndex="id"
           key="id"
@@ -73,20 +74,36 @@ export const ConfigurationList: React.FC<IResourceComponentsProps> = () => {
           defaultSortOrder={getDefaultSortOrder("id", sorter)}
           sorter
         />
-        {/* <Table.Column<IUser>
-                    title="Image"
-                    dataIndex="image"
+        <Table.Column<IConfiguration>
+                    title="img_photo"
+                    dataIndex="img_photo"
                     render={(_, record) => (
                         <ImageField
-                            value={record.product_id.image ? `http://localhost:8000/api/v1/material/${record.type}/${record.name.trim()}_${record.id_brand}_${record.metadata.color_code.trim()}_BaseColor.jpeg` : ''}
-                            title={record.metadata ? record.metadata.Fabric : ''}
+                            //@ts-ignore
+                            value={record.img_photo ? record.img_photo[0].response[0].url : ''}
+                            title={record.img_photo ? record.img_photo[0].name : ''}
                             width={200}
                             
                             height={200}
                         />
                     )}
                 />
-         */}
+        
+
+         <Table.Column
+          dataIndex="preset"
+          title="Preset"
+          render={(value) => (
+            <BooleanField
+              value={value === true}
+              trueIcon={<CheckCircleOutlined />}
+              falseIcon={<CloseCircleOutlined />}
+              valueLabelTrue="Preset configuration"
+              valueLabelFalse="user Configuration"
+            />
+          )}
+        />
+
         <Table.Column
           dataIndex="name"
           key="name"
@@ -96,14 +113,14 @@ export const ConfigurationList: React.FC<IResourceComponentsProps> = () => {
           sorter
           filterDropdown={(props: FilterDropdownProps) => (
             <FilterDropdown
-                {...props}
-                mapValue={(selectedKeys) =>
-                    selectedKeys.map((i) => parseInt(i.toString()))
-                }
+              {...props}
+              mapValue={(selectedKeys) =>
+                selectedKeys.map((i) => parseInt(i.toString()))
+              }
             >
-               
+
             </FilterDropdown>
-        )}
+          )}
           defaultFilteredValue={getDefaultFilter("name", filters)}
 
         />
@@ -116,26 +133,26 @@ export const ConfigurationList: React.FC<IResourceComponentsProps> = () => {
           sorter
           filterDropdown={(props: FilterDropdownProps) => (
             <FilterDropdown {...props}>
-                <Input />
+              <Input />
             </FilterDropdown>
-        )}
+          )}
         />
- 
+
         <Table.Column
-                    dataIndex="total_price"
-                    title="Total Price"
-                    render={(value) =>  <TextField value={value} />}
-                    defaultSortOrder={getDefaultSortOrder("total_price", sorter)}
-                    sorter
-                    filterDropdown={(props: FilterDropdownProps) => (
-                      <FilterDropdown {...props}>
-                          <Input />
-                      </FilterDropdown>
-                    )}
-                />
+          dataIndex="total_price"
+          title="Total Price"
+          render={(value) => <TextField value={value} />}
+          defaultSortOrder={getDefaultSortOrder("total_price", sorter)}
+          sorter
+          filterDropdown={(props: FilterDropdownProps) => (
+            <FilterDropdown {...props}>
+              <Input />
+            </FilterDropdown>
+          )}
+        />
 
 
-<Table.Column
+        <Table.Column
           dataIndex={["user_id", "username"]}
           title="Created By"
           render={(value) => {
@@ -151,7 +168,7 @@ export const ConfigurationList: React.FC<IResourceComponentsProps> = () => {
               />
             );
           }}
-/>
+        />
         <Table.Column
           dataIndex="createdAt"
           key="createdAt"
@@ -159,13 +176,25 @@ export const ConfigurationList: React.FC<IResourceComponentsProps> = () => {
           render={(value) => <DateField value={value} format="LLL" />}
           defaultSortOrder={getDefaultSortOrder("createdAt", sorter)}
           sorter
-          
+
         />
 
 
-      
-          
-      
+        <Table.Column
+          dataIndex="active"
+          title="Active"
+          render={(value) => (
+            <BooleanField
+              value={value === true}
+              trueIcon={<CheckCircleOutlined />}
+              falseIcon={<CloseCircleOutlined />}
+              valueLabelTrue="published"
+              valueLabelFalse="unpublished"
+            />
+          )}
+        />
+
+
         <Table.Column<IConfiguration>
           title="Actions"
           dataIndex="actions"
