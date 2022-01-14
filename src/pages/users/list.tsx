@@ -48,7 +48,8 @@ export const UserList: React.FC<IResourceComponentsProps> = () => {
                     dataIndex="img_photo"
                     render={(_, record) => (
                         <ImageField
-                            value={record.img_photo ? record.img_photo[0].response.url : ''}
+                            //@ts-ignore
+                            value={record.img_photo ? record.img_photo[0].thumbUrl : ''}
                             title={record.img_photo ? record.img_photo[0].name : ''}
                             width={200}
                             

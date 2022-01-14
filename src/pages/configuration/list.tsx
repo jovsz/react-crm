@@ -80,7 +80,7 @@ export const ConfigurationList: React.FC<IResourceComponentsProps> = () => {
                     render={(_, record) => (
                         <ImageField
                             //@ts-ignore
-                            value={record.img_photo ? record.img_photo[0].response[0].url : ''}
+                            value={record.img_photo ? record.img_photo[0].thumbUrl : ''}
                             title={record.img_photo ? record.img_photo[0].name : ''}
                             width={200}
                             
