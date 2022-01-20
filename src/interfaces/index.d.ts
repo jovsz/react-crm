@@ -102,7 +102,7 @@ export interface IConfiguration {
     },
   ];
   material_array: object;
-  total_price: string;
+  total_price: number;
   active: boolean;
   createdAt: string;
   status:boolean;
